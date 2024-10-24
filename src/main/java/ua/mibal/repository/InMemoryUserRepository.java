@@ -1,6 +1,5 @@
 package ua.mibal.repository;
 
-import org.springframework.stereotype.Repository;
 import ua.mibal.model.User;
 
 import java.util.ArrayList;
@@ -13,8 +12,8 @@ import static java.util.Collections.unmodifiableList;
  * @author Mykhailo Balakhon
  * @link <a href="mailto:mykhailo.balakhon@communify.us">mykhailo.balakhon@communify.us</a>
  */
-@Repository
-public class InMemoryUserRepository implements UserRepository {
+@org.springframework.stereotype.Repository
+public class InMemoryUserRepository implements Repository<User, Long> {
     private final List<User> users = new ArrayList<>();
     private int idGenerator = 0;
 

@@ -3,7 +3,7 @@ package ua.mibal.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.mibal.model.User;
-import ua.mibal.repository.UserRepository;
+import ua.mibal.repository.Repository;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class UserService {
-    private final UserRepository repository;
+    private final Repository<User, Long> repository;
 
     public User getById(Long id) {
         return repository.findById(id)

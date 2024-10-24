@@ -1,7 +1,5 @@
 package ua.mibal.repository;
 
-import ua.mibal.model.User;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -9,12 +7,13 @@ import java.util.Optional;
  * @author Mykhailo Balakhon
  * @link <a href="mailto:mykhailo.balakhon@communify.us">mykhailo.balakhon@communify.us</a>
  */
-public interface UserRepository {
-    Optional<User> findById(Long id);
+public interface Repository<T, ID> {
 
-    Optional<User> deleteById(Long id);
+    Optional<T> findById(ID id);
 
-    User save(User user);
+    Optional<T> deleteById(ID id);
 
-    List<User> findAll();
+    T save(T entity);
+
+    List<T> findAll();
 }
