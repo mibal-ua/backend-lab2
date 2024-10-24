@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public User get(@RequestBody User user) {
+    public User create(@RequestBody User user) {
         return null;
     }
 
