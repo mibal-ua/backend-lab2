@@ -3,7 +3,7 @@ package ua.mibal.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.mibal.model.Category;
-import ua.mibal.repository.Repository;
+import ua.mibal.repository.CategoryRepository;
 
 /**
  * @author Mykhailo Balakhon
@@ -12,7 +12,7 @@ import ua.mibal.repository.Repository;
 @RequiredArgsConstructor
 @Service
 public class CategoryService {
-    private final Repository<Category, Long> repository;
+    private final CategoryRepository repository;
 
     public Category create(Category category) {
         return repository.save(category);

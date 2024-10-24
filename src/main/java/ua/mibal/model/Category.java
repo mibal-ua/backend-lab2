@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Category {
+public class Category implements WithId {
     private Long id;
     private String name;
 }
