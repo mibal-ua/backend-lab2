@@ -17,11 +17,13 @@ public class UserService {
     private final UserRepository repository;
 
     public User getById(Long id) {
-        return repository.findById(id);
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
     public User deleteById(Long id) {
-        return repository.deleteById(id);
+        return repository.deleteById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
     public User create(User user) {
