@@ -2,6 +2,7 @@ package ua.mibal.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ua.mibal.exception.BadRequestException;
 import ua.mibal.exception.NotFoundException;
 import ua.mibal.model.Record;
 import ua.mibal.model.RecordSearchQuery;
@@ -37,6 +38,13 @@ public class RecordService {
     }
 
     public List<Record> searchBy(RecordSearchQuery query) {
+        validate(query);
         return repository.findByQuery(query);
+    }
+
+    private void validate(RecordSearchQuery query) {
+        if (query.userId() == null && query.categoryId() == null) {
+            throw new BadRequestException("At least one parameter should be provided");
+        }
     }
 }

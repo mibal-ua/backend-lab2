@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ua.mibal.model.Record;
 import ua.mibal.model.RecordSearchQuery;
@@ -25,7 +26,9 @@ public class RecordController {
     private final RecordService service;
 
     @GetMapping
-    public List<Record> search(RecordSearchQuery query) {
+    public List<Record> search(@RequestParam(name = "user_id", required = false) Long userId,
+                               @RequestParam(name = "category_id", required = false) Long categoryId) {
+        RecordSearchQuery query = new RecordSearchQuery(userId, categoryId);
         return service.searchBy(query);
     }
 
