@@ -14,6 +14,16 @@ import ua.mibal.repository.CategoryRepository;
 public class CategoryService {
     private final CategoryRepository repository;
 
+    public Category getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+    }
+
+    public Category deleteById(Long id) {
+        return repository.deleteById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+    }
+
     public Category create(Category category) {
         return repository.save(category);
     }
