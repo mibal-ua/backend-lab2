@@ -2,6 +2,7 @@ package ua.mibal.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ua.mibal.controller.exception.NotFoundException;
 import ua.mibal.model.Category;
 import ua.mibal.repository.CategoryRepository;
 
@@ -16,12 +17,12 @@ public class CategoryService {
 
     public Category getById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+                .orElseThrow(() -> new NotFoundException("Category not found"));
     }
 
     public Category deleteById(Long id) {
         return repository.deleteById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+                .orElseThrow(() -> new NotFoundException("Category not found"));
     }
 
     public Category create(Category category) {

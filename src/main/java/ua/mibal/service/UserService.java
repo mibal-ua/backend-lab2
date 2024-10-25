@@ -2,6 +2,7 @@ package ua.mibal.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ua.mibal.controller.exception.NotFoundException;
 import ua.mibal.model.User;
 import ua.mibal.repository.UserRepository;
 
@@ -18,12 +19,12 @@ public class UserService {
 
     public User getById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     public User deleteById(Long id) {
         return repository.deleteById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     public User create(User user) {
