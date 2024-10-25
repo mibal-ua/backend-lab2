@@ -1,6 +1,5 @@
 package ua.mibal.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,10 +9,13 @@ import lombok.Setter;
  * @link <a href="mailto:mykhailo.balakhon@communify.us">mykhailo.balakhon@communify.us</a>
  */
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Category implements WithId {
     private Long id;
     private String name;
+
+    public Category(String name) {
+        this.name = name;
+    }
 }

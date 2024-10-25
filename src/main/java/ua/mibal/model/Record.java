@@ -21,4 +21,11 @@ public class Record implements WithId {
     private Long categoryId;
     private LocalDateTime timestamp;
     private Long amount;
+
+    public Record(Long userId, Long categoryId, LocalDateTime timestamp, Long amount) {
+        this.userId = userId;
+        this.categoryId = categoryId;
+        this.timestamp = timestamp;
+        this.amount = amount;
+    }
 }
