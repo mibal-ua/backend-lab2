@@ -13,7 +13,7 @@ import static java.util.Collections.unmodifiableList;
  * @link <a href="mailto:mykhailo.balakhon@communify.us">mykhailo.balakhon@communify.us</a>
  */
 public abstract class InMemoryRepository<E extends WithId> {
-    private final List<E> entities = new ArrayList<>();
+    protected final List<E> entities = new ArrayList<>();
     private int idGenerator = 0;
 
     public Optional<E> findById(Long id) {

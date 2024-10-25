@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Record {
+public class Record implements WithId {
     private Long id;
     private Long userId;
     private Long categoryId;
