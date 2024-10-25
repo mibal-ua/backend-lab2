@@ -2,7 +2,7 @@ package ua.mibal.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.mibal.controller.exception.NotFoundException;
+import ua.mibal.exception.NotFoundException;
 import ua.mibal.model.User;
 import ua.mibal.repository.UserRepository;
 

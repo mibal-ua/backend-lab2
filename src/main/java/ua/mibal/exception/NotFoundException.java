@@ -1,4 +1,4 @@
-package ua.mibal.controller.exception;
+package ua.mibal.exception;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 
