@@ -1,6 +1,8 @@
 package ua.mibal.model;
 
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Getter
 @Setter
 public class Record implements WithId {
@@ -21,11 +24,5 @@ public class Record implements WithId {
     private Long categoryId;
     private LocalDateTime timestamp;
     private Long amount;
-
-    public Record(Long userId, Long categoryId, LocalDateTime timestamp, Long amount) {
-        this.userId = userId;
-        this.categoryId = categoryId;
-        this.timestamp = timestamp;
-        this.amount = amount;
-    }
+    private @Nullable Currency currency;
 }
