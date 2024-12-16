@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+  db:
+    image: postgres:9-apline
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: backend-lab
   app:
     image: backend-lab2
     restart: always
@@ -9,5 +15,8 @@ services:
       dockerfile: Dockerfile
     environment:
       SERVER_PORT: 7070
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/backend-lab
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
     ports:
       - "7070:7070"
