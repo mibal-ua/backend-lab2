@@ -1,5 +1,6 @@
 # Backend Lab 1
-Author: Mykhailo Balakhon IM-22
+Author: Mykhailo Balakhon IM-22, Order in group: 1st
+Variant: 1 (Currency)
 
 ## Run instructions
 
@@ -21,8 +22,17 @@ Author: Mykhailo Balakhon IM-22
    mvn clean package
    ```
 
-4. **Run the Application:**
+4. (1) **Run the Application:**
    Find an executable JAR file and run it using:
    ```bash
    java -jar target/<jar_file_name>.jar
+   ```
+4. (2) **Run the Docker-compose application:**
+   Build lab docker image using:
+   ```bash
+   docker build . -t backend-lab:latest
+   ```
+   Start the application using:
+   ```bash
+   docker compose up
    ```
