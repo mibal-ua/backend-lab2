@@ -2,6 +2,7 @@ package ua.mibal.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,11 @@ import java.util.List;
 public class UserController {
     private final UserService service;
 
+    @GetMapping("/user/me")
+    public User getMe(Authentication authentication) {
+        return service.getByEmail(authentication.getName());
+    }
+    
     @GetMapping("/user/{id}")
     public User get(@PathVariable Long id) {
         return service.getById(id);
