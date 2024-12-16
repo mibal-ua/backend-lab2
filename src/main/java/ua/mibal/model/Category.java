@@ -4,8 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,16 +30,11 @@ public class Category implements WithId {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "author_id")
-    private User author;
-
     @Override
     public String toString() {
         return "Category{" +
                "id=" + id +
                ", name='" + name + '\'' +
-               ", author=" + author +
                '}';
     }
 }
