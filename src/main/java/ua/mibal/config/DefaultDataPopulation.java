@@ -5,14 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ua.mibal.controller.model.CurrencyDto;
+import ua.mibal.exception.BadRequestException;
 import ua.mibal.model.Category;
 import ua.mibal.model.Currency;
 import ua.mibal.model.Record;
 import ua.mibal.model.User;
 import ua.mibal.repository.CategoryRepository;
-import ua.mibal.repository.CurrencyRepository;
 import ua.mibal.repository.RecordRepository;
 import ua.mibal.repository.UserRepository;
+import ua.mibal.service.CurrencyService;
 
 import static java.time.LocalDateTime.now;
 
@@ -24,7 +26,7 @@ import static java.time.LocalDateTime.now;
 @RequiredArgsConstructor
 @Configuration
 public class DefaultDataPopulation {
-    private final CurrencyRepository currencyRepository;
+    private final CurrencyService currencyService;
 
     @Bean
     public CommandLineRunner setup(UserRepository userRepository,
@@ -33,8 +35,7 @@ public class DefaultDataPopulation {
         return (args) -> {
             populateDefaultCurrencies();
 
-            Currency usd = currencyRepository.findByName("USD")
-                    .orElseThrow();
+            Currency usd = currencyService.getByName("USD");
 
             User me = User.builder()
                     .name("Mykhailo Balakhon")
@@ -61,16 +62,22 @@ public class DefaultDataPopulation {
     }
 
     private void populateDefaultCurrencies() {
-        Currency uah = Currency.builder()
-                .name("UAH")
-                .build();
-        currencyRepository.save(uah);
-        log.info("Currency saved: {}", uah);
+        try {
+            Currency uah = currencyService.create(CurrencyDto.builder()
+                    .name("UAH")
+                    .build());
+            log.info("Currency saved: {}", uah);
+        } catch (BadRequestException e) {
+            
+        }
 
-        Currency usd = Currency.builder()
-                .name("USD")
-                .build();
-        currencyRepository.save(usd);
-        log.info("Currency saved: {}", usd);
+        try {
+            Currency usd = currencyService.create(CurrencyDto.builder()
+                    .name("USD")
+                    .build());
+            log.info("Currency saved: {}", usd);
+        } catch (BadRequestException e) {
+
+        }
     }
 }

@@ -27,7 +27,7 @@ public class Currency {
     @Id @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     
     public Currency(String name) {
