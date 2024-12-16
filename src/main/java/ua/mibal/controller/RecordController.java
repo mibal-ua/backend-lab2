@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ua.mibal.controller.model.RecordDto;
 import ua.mibal.model.Record;
 import ua.mibal.model.RecordSearchQuery;
 import ua.mibal.service.RecordService;
@@ -43,7 +44,7 @@ public class RecordController {
     }
 
     @PostMapping
-    public Record create(@RequestBody Record record) {
+    public Record create(@RequestBody RecordDto record) {
         return service.create(record);
     }
 }

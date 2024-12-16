@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ua.mibal.controller.model.CategoryDto;
 import ua.mibal.model.Category;
 import ua.mibal.service.CategoryService;
 
@@ -32,7 +33,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category create(@RequestBody Category category) {
+    public Category create(@RequestBody CategoryDto category) {
         return service.create(category);
     }
 }

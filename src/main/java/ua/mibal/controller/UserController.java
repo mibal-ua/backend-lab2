@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import ua.mibal.controller.model.UserDto;
 import ua.mibal.model.User;
 import ua.mibal.service.UserService;
 
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public User create(@RequestBody User user) {
+    public User create(@RequestBody UserDto user) {
         return service.create(user);
     }
 

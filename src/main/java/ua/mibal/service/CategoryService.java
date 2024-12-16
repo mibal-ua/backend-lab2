@@ -2,6 +2,7 @@ package ua.mibal.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ua.mibal.controller.model.CategoryDto;
 import ua.mibal.exception.NotFoundException;
 import ua.mibal.model.Category;
 import ua.mibal.repository.CategoryRepository;
@@ -24,7 +25,11 @@ public class CategoryService {
         repository.deleteById(id);
     }
 
-    public Category create(Category category) {
-        return repository.save(category);
+    public Category create(CategoryDto category) {
+        return repository.save(
+                Category.builder()
+                        .name(category.name())
+                        .build()
+        );
     }
 }

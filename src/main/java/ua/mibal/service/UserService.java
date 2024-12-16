@@ -2,8 +2,10 @@ package ua.mibal.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ua.mibal.controller.model.UserDto;
 import ua.mibal.exception.NotFoundException;
 import ua.mibal.model.User;
+import ua.mibal.repository.CurrencyRepository;
 import ua.mibal.repository.UserRepository;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository repository;
+    private final CurrencyRepository currencyRepository;
 
     public User getById(Long id) {
         return repository.findById(id)
@@ -26,8 +29,14 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    public User create(User user) {
-        return repository.save(user);
+    public User create(UserDto user) {
+        return repository.save(User.builder()
+                .name(user.name())
+                .defaultCurrency(
+                        currencyRepository.findById(user.defaultCurrencyId())
+                                .orElseThrow(() -> new NotFoundException("Currency not found"))
+                )
+                .build());
     }
 
     public List<User> getAll() {
