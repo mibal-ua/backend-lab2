@@ -8,7 +8,7 @@ services:
         POSTGRES_PASSWORD: postgres
         POSTGRES_DB: backend-lab
   app:
-    image: backend-lab2
+    image: backend-lab
     restart: always
     build:
       context: .
