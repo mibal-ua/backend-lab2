@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.mibal.controller.model.UserDto;
+import ua.mibal.exception.BadRequestException;
 import ua.mibal.exception.NotFoundException;
 import ua.mibal.model.User;
 import ua.mibal.repository.CurrencyRepository;
@@ -35,6 +36,8 @@ public class UserService {
         validateEmailUnique(user.email());
         return repository.save(User.builder()
                 .name(user.name())
+                .email(user.email())
+                .password(user.password())
                 .defaultCurrency(
                         currencyRepository.findById(user.defaultCurrencyId())
                                 .orElseThrow(() -> new NotFoundException("Currency not found"))
@@ -53,7 +56,7 @@ public class UserService {
 
     private void validateEmailUnique(@NotBlank String email) {
         if (repository.existsByEmail(email)) {
-            throw new IllegalArgumentException("User with email already exists");
+            throw new BadRequestException("User with email already exists");
         }
     }
 }
