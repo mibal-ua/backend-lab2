@@ -1,5 +1,6 @@
 package ua.mibal.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category create(@RequestBody CategoryDto category) {
+    public Category create(@Valid @RequestBody CategoryDto category) {
         return service.create(category);
     }
 }

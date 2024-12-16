@@ -1,5 +1,6 @@
 package ua.mibal.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +45,7 @@ public class RecordController {
     }
 
     @PostMapping
-    public Record create(@RequestBody RecordDto record) {
+    public Record create(@Valid @RequestBody RecordDto record) {
         return service.create(record);
     }
 }

@@ -1,5 +1,6 @@
 package ua.mibal.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,7 @@ public class CurrencyController {
     }
 
     @PostMapping
-    public Currency create(@RequestBody CurrencyDto currency) {
+    public Currency create(@Valid @RequestBody CurrencyDto currency) {
         return service.create(currency);
     }
 

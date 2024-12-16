@@ -1,5 +1,6 @@
 package ua.mibal.service;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.mibal.controller.model.UserDto;
@@ -29,7 +30,7 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    public User create(UserDto user) {
+    public User create(@Valid UserDto user) {
         return repository.save(User.builder()
                 .name(user.name())
                 .defaultCurrency(
