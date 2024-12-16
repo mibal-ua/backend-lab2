@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import ua.mibal.controller.model.CurrencyDto;
 import ua.mibal.exception.BadRequestException;
 import ua.mibal.model.Category;
@@ -15,6 +16,7 @@ import ua.mibal.repository.CategoryRepository;
 import ua.mibal.repository.RecordRepository;
 import ua.mibal.repository.UserRepository;
 import ua.mibal.service.CurrencyService;
+import ua.mibal.service.UserService;
 
 import static java.time.LocalDateTime.now;
 
@@ -27,22 +29,14 @@ import static java.time.LocalDateTime.now;
 @Configuration
 public class DefaultDataPopulation {
     private final CurrencyService currencyService;
+    private final PasswordEncoder passwordEncoder;
 
     @Bean
     public CommandLineRunner setup(UserRepository userRepository,
                                    CategoryRepository categoryRepository,
-                                   RecordRepository recordRepository) {
+                                   RecordRepository recordRepository, UserService userService) {
         return (args) -> {
             populateDefaultCurrencies();
-
-            Currency usd = currencyService.getByName("USD");
-
-            User me = User.builder()
-                    .name("Mykhailo Balakhon")
-                    .defaultCurrency(usd)
-                    .build();
-            userRepository.save(me);
-            log.info("User saved: {}", me);
 
             Category thriller = Category.builder()
                     .name("Thriller")
@@ -50,14 +44,26 @@ public class DefaultDataPopulation {
             categoryRepository.save(thriller);
             log.info("Category saved: {}", thriller);
 
-            Record buying = Record.builder()
-                    .user(me)
-                    .category(thriller)
-                    .timestamp(now())
-                    .amount(100_500L)
-                    .build();
-            recordRepository.save(buying);
-            log.info("Record saved: {}", buying);
+            if (!userRepository.existsByEmail("name@example.com")) {
+                Currency usd = currencyService.getByName("USD");
+                User me = User.builder()
+                        .name("Mykhailo Balakhon")
+                        .email("name@example.com")
+                        .password(passwordEncoder.encode("123"))
+                        .defaultCurrency(usd)
+                        .build();
+                userRepository.save(me);
+                log.info("User saved: {}", me);
+
+                Record buying = Record.builder()
+                        .user(me)
+                        .category(thriller)
+                        .timestamp(now())
+                        .amount(100_500L)
+                        .build();
+                recordRepository.save(buying);
+                log.info("Record saved: {}", buying);
+            }
         };
     }
 
