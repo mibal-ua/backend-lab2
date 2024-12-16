@@ -1,5 +1,6 @@
 package ua.mibal.controller;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,11 +36,13 @@ public class CurrencyController {
         return service.getByName(name);
     }
 
+    @RolesAllowed("USER")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.deleteById(id);
     }
 
+    @RolesAllowed("USER")
     @PostMapping
     public Currency create(@Valid @RequestBody CurrencyDto currency) {
         return service.create(currency);
