@@ -12,6 +12,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Mykhailo Balakhon
@@ -24,13 +29,19 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "users")
-public class User implements WithId {
+public class User implements WithId, UserDetails {
     
     @Id @GeneratedValue
     private Long id;
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "default_currency_id")
@@ -41,7 +52,18 @@ public class User implements WithId {
         return "User{" +
                "id=" + id +
                ", name='" + name + '\'' +
+               ", email='" + email + '\'' +
                ", defaultCurrency=" + defaultCurrency +
                '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(() -> "USER");
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 }
