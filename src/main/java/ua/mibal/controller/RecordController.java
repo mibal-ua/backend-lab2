@@ -38,8 +38,8 @@ public class RecordController {
     }
 
     @DeleteMapping("/{id}")
-    public Record delete(@PathVariable Long id) {
-        return service.deleteById(id);
+    public void delete(@PathVariable Long id) {
+        service.deleteById(id);
     }
 
     @PostMapping

@@ -22,9 +22,8 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("User not found"));
     }
 
-    public User deleteById(Long id) {
-        return repository.deleteById(id)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 
     public User create(User user) {

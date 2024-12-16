@@ -24,9 +24,8 @@ public class RecordService {
                 .orElseThrow(() -> new NotFoundException("Record not found"));
     }
 
-    public Record deleteById(Long id) {
-        return repository.deleteById(id)
-                .orElseThrow(() -> new NotFoundException("Record not found"));
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 
     public Record create(Record record) {
