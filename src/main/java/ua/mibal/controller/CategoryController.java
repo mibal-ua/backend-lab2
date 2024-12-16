@@ -27,8 +27,8 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public Category delete(@PathVariable Long id) {
-        return service.deleteById(id);
+    public void delete(@PathVariable Long id) {
+        service.deleteById(id);
     }
 
     @PostMapping

@@ -1,12 +1,11 @@
 package ua.mibal.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ua.mibal.model.Category;
 
 /**
  * @author Mykhailo Balakhon
  * @link <a href="mailto:mykhailo.balakhon@communify.us">mykhailo.balakhon@communify.us</a>
  */
-@Repository
-public class CategoryRepository extends InMemoryRepository<Category> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 }

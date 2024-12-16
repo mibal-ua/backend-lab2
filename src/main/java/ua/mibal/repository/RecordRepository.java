@@ -1,6 +1,6 @@
 package ua.mibal.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ua.mibal.model.Record;
 import ua.mibal.model.RecordSearchQuery;
 
@@ -10,15 +10,14 @@ import java.util.List;
  * @author Mykhailo Balakhon
  * @link <a href="mailto:mykhailo.balakhon@communify.us">mykhailo.balakhon@communify.us</a>
  */
-@Repository
-public class RecordRepository extends InMemoryRepository<Record> {
+public interface RecordRepository extends JpaRepository<Record, Long> {
 
-    public List<Record> findByQuery(RecordSearchQuery query) {
-        return entities.stream()
+    default List<Record> findByQuery(RecordSearchQuery query) {
+        return findAll().stream()
                 .filter(record -> query.userId() == null
-                                  || query.userId().equals(record.getUserId()))
+                                  || query.userId().equals(record.getUser().getId()))
                 .filter(record -> query.categoryId() == null
-                                  || query.categoryId().equals(record.getCategoryId()))
+                                  || query.categoryId().equals(record.getCategory().getId()))
                 .toList();
     }
 }

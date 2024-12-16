@@ -1,12 +1,11 @@
 package ua.mibal.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ua.mibal.model.User;
 
 /**
  * @author Mykhailo Balakhon
  * @link <a href="mailto:mykhailo.balakhon@communify.us">mykhailo.balakhon@communify.us</a>
  */
-@Repository
-public class UserRepository extends InMemoryRepository<User> {
+public interface UserRepository extends JpaRepository<User, Long> {
 }

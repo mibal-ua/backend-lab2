@@ -20,9 +20,8 @@ public class CategoryService {
                 .orElseThrow(() -> new NotFoundException("Category not found"));
     }
 
-    public Category deleteById(Long id) {
-        return repository.deleteById(id)
-                .orElseThrow(() -> new NotFoundException("Category not found"));
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 
     public Category create(Category category) {
