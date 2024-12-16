@@ -59,7 +59,7 @@ public class User implements WithId, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "USER");
+        return List.of(() -> "ROLE_USER");
     }
 
     @Override
