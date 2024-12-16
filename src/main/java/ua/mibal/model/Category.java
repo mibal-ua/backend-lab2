@@ -35,4 +35,13 @@ public class Category implements WithId {
     @ManyToOne(optional = true)
     @JoinColumn(name = "author_id")
     private User author;
+
+    @Override
+    public String toString() {
+        return "Category{" +
+               "id=" + id +
+               ", name='" + name + '\'' +
+               ", author=" + author +
+               '}';
+    }
 }

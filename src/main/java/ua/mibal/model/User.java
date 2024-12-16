@@ -35,4 +35,13 @@ public class User implements WithId {
     @ManyToOne(optional = false)
     @JoinColumn(name = "default_currency_id")
     private Currency defaultCurrency;
+
+    @Override
+    public String toString() {
+        return "User{" +
+               "id=" + id +
+               ", name='" + name + '\'' +
+               ", defaultCurrency=" + defaultCurrency +
+               '}';
+    }
 }
