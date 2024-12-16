@@ -1,6 +1,7 @@
 package ua.mibal.service;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.mibal.controller.model.UserDto;
@@ -31,6 +32,7 @@ public class UserService {
     }
 
     public User create(@Valid UserDto user) {
+        validateEmailUnique(user.email());
         return repository.save(User.builder()
                 .name(user.name())
                 .defaultCurrency(
@@ -42,5 +44,16 @@ public class UserService {
 
     public List<User> getAll() {
         return repository.findAll();
+    }
+
+    public User getByEmail(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+    }
+
+    private void validateEmailUnique(@NotBlank String email) {
+        if (repository.existsByEmail(email)) {
+            throw new IllegalArgumentException("User with email already exists");
+        }
     }
 }

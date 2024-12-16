@@ -35,7 +35,9 @@ public class AuthController {
     @PostMapping("/register")
     @ResponseStatus(CREATED)
     public TokenDto register(@Valid @RequestBody UserDto user) {
-        return authService.register(user);
+        String token = authService.register(user);
+        return TokenDto.builder()
+                .token(token)
+                .build();
     }
-
 }
